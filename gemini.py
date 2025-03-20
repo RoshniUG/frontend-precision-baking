@@ -53,6 +53,21 @@ def generate_recipe():
 
     try:
         # Generate recipe using Gemini API
+        # Generate recipe using Gemini API with a structured prompt
+        prompt = (
+            f"Generate a detailed recipe for {dish}. "
+            "Format the response as follows:\n\n"
+            "## Recipe Title\n"
+            "### Ingredients\n"
+            "- Ingredient 1\n"
+            "- Ingredient 2\n"
+            "...\n"
+            "### Instructions\n"
+            "1. Step 1\n"
+            "2. Step 2\n"
+            "..."
+        )
+        
         response = gemini_model.generate_content(f"Generate a detailed recipe for {dish}")
         return jsonify({"recipe": response.text})
     except Exception as e:

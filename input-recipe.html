@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -46,6 +46,13 @@
         textarea {
             min-height: 150px;
             resize: vertical;
+            /* **changes */
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            /* **changes */
         }
         
         .ingredient-row {
@@ -214,15 +221,15 @@
         
         <a href="index.html" class="back-link">← Back to Home</a>
         
-        <div class="success-message" id="success-message">
+        <!-- <div class="success-message" id="success-message">
             Your recipe has been submitted successfully! Thank you for sharing.
-        </div>
+        </div> -->
         
         <section class="recipe-form-container">
             <h2>Add Your Recipe</h2>
             <form class="recipe-form" id="recipe-form">
                 <div class="form-group">
-                    <label for="recipe-name">Recipe Name</label>
+                    <!-- <label for="recipe-name">Recipe Name</label>
                     <input type="text" id="recipe-name" placeholder="e.g., Homemade Chocolate Chip Cookies" required>
                 </div>
                 <div class="form-group">
@@ -242,7 +249,12 @@
                         <option value="1 tablespoon">1 tablespoon</option>
                     </select>
                 </div>
-                <button type="submit" class="btn">Submit Recipe</button>
+                <button type="submit" class="btn">Submit Recipe</button> -->
+
+                <label for="recipe-text">Enter Full Recipe</label>
+                <textarea id="recipe-text" placeholder="E.g., Mix 2 cups of flour with 1/2 teaspoon of salt..." required></textarea>
+            </div>
+            <button type="submit" class="btn">Submit Recipe</button>
             </form>
         </section>
         <footer>
@@ -252,4 +264,5 @@
     </body>
     <script src = "ai-script.js" >
     </script>
-    </html>
+    </html> 
+    
