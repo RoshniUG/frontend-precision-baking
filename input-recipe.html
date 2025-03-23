@@ -210,6 +210,34 @@
             background-color: #f8d7da;
             color: #721c24;
         }
+
+         /* Additional styles for the output section */
+         .output-section {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background-color: #f8f9fa;
+            border-radius: 12px;
+            border: 1px solid #ddd;
+            display: none; /* Hidden by default */
+        }
+
+        .output-section h3 {
+            margin-top: 0;
+            color: #2c3e50;
+        }
+
+        .output-section p {
+            margin: 0;
+            font-size: 1.1rem;
+            color: #333;
+        }
+
+        .output-section .predicted-mass {
+            font-weight: 600;
+            color: #27ae60;
+        }
+
+        
     </style>
 </head>
 <body>
@@ -229,7 +257,7 @@
             <h2>Add Your Recipe</h2>
             <form class="recipe-form" id="recipe-form">
                 <div class="form-group">
-                    <!-- <label for="recipe-name">Recipe Name</label>
+                    <label for="recipe-name">Recipe Name</label>
                     <input type="text" id="recipe-name" placeholder="e.g., Homemade Chocolate Chip Cookies" required>
                 </div>
                 <div class="form-group">
@@ -249,14 +277,24 @@
                         <option value="1 tablespoon">1 tablespoon</option>
                     </select>
                 </div>
-                <button type="submit" class="btn">Submit Recipe</button> -->
+                <button type="submit" class="btn">Submit Recipe</button> 
 
-                <label for="recipe-text">Enter Full Recipe</label>
+                <!-- <label for="recipe-text">Enter Full Recipe</label>
                 <textarea id="recipe-text" placeholder="E.g., Mix 2 cups of flour with 1/2 teaspoon of salt..." required></textarea>
             </div>
-            <button type="submit" class="btn">Submit Recipe</button>
+            <button type="submit" class="btn">Submit Recipe</button> -->
             </form>
         </section>
+
+         <!-- New output section -->
+         <section class="output-section" id="output-section">
+            <h3>Predicted Mass</h3>
+            <p>The predicted mass for <span id="output-ingredient"></span> (<span id="output-volume"></span>) is: 
+               <span class="predicted-mass" id="output-mass"></span>
+            </p>
+        </section>
+
+
         <footer>
             <p>&copy; 2023 Culinary Explorer. All rights reserved.</p>
         </footer>

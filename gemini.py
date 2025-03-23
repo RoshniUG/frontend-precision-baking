@@ -68,8 +68,22 @@ def generate_recipe():
             "..."
         )
         
-        response = gemini_model.generate_content(f"Generate a detailed recipe for {dish}")
-        return jsonify({"recipe": response.text})
+        # response = gemini_model.generate_content(f"Generate a detailed recipe for {dish}")
+        # return jsonify({"recipe": response.text})
+        response = gemini_model.generate_content(prompt)
+        recipe_text = response.text
+    # # **to fetch the image
+    # # Fetch a related image for the dish using Gemini API
+    #     image_prompt = f"Generate an image URL for {dish} dish"
+    #     image_response = gemini_model.generate_content(image_prompt)
+    #     image_url = image_response.text  
+       
+        # print("Generated Image URL:", image_url)
+        return jsonify({
+            "recipe": recipe_text
+            
+        })
+    #** to fecth the image
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 

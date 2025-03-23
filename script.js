@@ -118,11 +118,23 @@
 document.addEventListener("DOMContentLoaded", function () {
     const searchForm = document.querySelector(".search-form");
     const ingredientsInput = document.getElementById("ingredients");
+    const resultsContainer = document.querySelector(".results-container");
 
-    if (!searchForm || !ingredientsInput) {
+    if (!searchForm || !ingredientsInput || !resultsContainer) {
         console.error("Form or input element not found!");
         return;
     }
+
+    // **eliminating page loding issue
+    // Check if there's saved data in localStorage
+    // const savedRecipe = localStorage.getItem("recipe");
+    // const savedImageUrl = localStorage.getItem("imageUrl");
+
+    // if (savedRecipe && savedImageUrl) {
+    //     // Display the saved recipe and image
+    //     displayRecipes(savedRecipe, savedImageUrl);
+    // }
+    //**eliminating page loading issue */
 
     searchForm.addEventListener("submit", async function (event) {
         event.preventDefault(); // Prevent form submission
@@ -156,7 +168,37 @@ document.addEventListener("DOMContentLoaded", function () {
             if (!data.recipe) {
                 throw new Error("No recipe found in the response.");
             }
-            displayRecipes(data.recipe); // Display the recipe in the UI
+
+            // Log the image URL for debugging
+console.log("Image URL:", data.imageUrl);
+
+
+            // **changes
+            // Fetch the related image for the recipe using the Gemini API
+            // const imageResponse = await fetch("http://localhost:5000/get-recipe-image", {
+            //     method: "POST",
+            //     headers: {
+            //         "Content-Type": "application/json",
+            //     },
+            //     body: JSON.stringify({ dish: dish }),
+            // });
+
+            // if (!imageResponse.ok) {
+            //     throw new Error("Failed to fetch recipe image");
+            // }
+
+            // const imageData = await imageResponse.json();
+            // const imageUrl = imageData.imageUrl;
+
+        // **changes
+
+            //**eliminate the loding page issue */
+         // Save the recipe and image URL to localStorage
+         localStorage.setItem("recipe", data.recipe);
+         localStorage.setItem("imageUrl", data.imageUrl);
+         //**eliminate the loding page issue */
+
+            displayRecipes(data.recipe,data.imageUrl); // Display the recipe in the UI
         } catch (error) { // Explicitly type the error object
             console.error("Error:", error);
             alert(`An error occurred: ${error.message}`);
@@ -178,9 +220,28 @@ document.addEventListener("DOMContentLoaded", function () {
         return;
         }
         resultsContainer.innerHTML = "";
+
+           // Use a fallback image if the image URL is invalid
+    // const validImageUrl = imageUrl.startsWith("http") ? imageUrl : "https://source.unsplash.com/800x600/?food";
+    const localImageUrl = "background-img.jpg";
+        // **changes
+        // Set the image as the background of the results container
+        resultsContainer.style.backgroundImage = `url(${localImageUrl})`;
+        resultsContainer.style.backgroundSize = "cover";
+        resultsContainer.style.backgroundPosition = "center";
+        resultsContainer.style.padding = "20px"; // Add padding for the white menu card effect
+        // **changes
+
         // Create a new recipe card
         const recipeCard = document.createElement("div");
         recipeCard.className = "recipe-card";
+
+        // **changes
+        recipeCard.style.backgroundColor = "rgba(255, 255, 255, 0.7)"; // White background with transparency
+        recipeCard.style.borderRadius = "12px";
+        recipeCard.style.padding = "20px";
+        recipeCard.style.boxShadow = "0 5px 15px rgba(0, 0, 0, 0.1)";
+         // **changes
 
         const recipeContent = document.createElement("div");
         recipeContent.className = "recipe-content";
@@ -226,6 +287,8 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
+    //  **changes
+    //  **changes
     function parseRecipe(recipeText) {
         console.log("Parsing recipe text:", recipeText);
 
